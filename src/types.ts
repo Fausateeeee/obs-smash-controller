@@ -1,12 +1,12 @@
 import { JsonObject } from 'type-fest'
 
-export interface OBSWebSocketConfig {
+export interface IOBSWebSocketConfig {
   port: number
   ip: string
   psw: string
 }
 
-export interface OBSSourcePayload {
+export interface IOBSSourcePayload {
   name: string
   payload: JsonObject
 }
