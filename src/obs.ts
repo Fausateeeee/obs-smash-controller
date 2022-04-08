@@ -34,4 +34,8 @@ export default class OBS {
   public async setPlayerCharacter(source: OBSSourcePayload) {}
 
   public async swapPlayer(source: OBSSourcePayload) {}
+
+  public async updatePlayerScore(source: OBSSourcePayload) {}
+
+  public async updateMatchRound(source: OBSSourcePayload) {}
 }

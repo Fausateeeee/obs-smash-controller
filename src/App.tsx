@@ -8,12 +8,19 @@ import {
   InputGroup,
   InputLeftAddon,
   InputRightElement,
+  NumberDecrementStepper,
+  NumberIncrementStepper,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
 } from '@chakra-ui/react'
 
 function App() {
   const obs = new OBS()
   const [player1Name, setPlayer1Name] = useState('')
   const [player2Name, setPlayer2Name] = useState('')
+  const [player1Score, setPlayer1Score] = useState(0)
+  const [player2Score, setPlayer2Score] = useState(0)
   const wsc = {
     port: 4444,
     psw: '',
@@ -38,6 +45,21 @@ function App() {
                 setPlayer1Name(e.target.value)
               }}
             />
+            <NumberInput
+              mr='5rem'
+              onChange={(e, value) => {
+                setPlayer1Score(value)
+              }}
+              defaultValue={0}
+              min={0}
+              max={3}
+            >
+              <NumberInputField />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
             <InputRightElement w='5rem'>
               <Button
                 size='md'
@@ -63,6 +85,22 @@ function App() {
                 setPlayer2Name(e.target.value)
               }}
             />
+            <NumberInput
+              mr='5rem'
+              defaultValue={0}
+              min={0}
+              max={3}
+              onChange={(e, value) => {
+                setPlayer2Score(value)
+              }}
+            >
+              <NumberInputField />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
+
             <InputRightElement w='5rem'>
               <Button
                 size='md'
@@ -78,6 +116,10 @@ function App() {
               </Button>
             </InputRightElement>
           </InputGroup>
+        </Box>
+        <Box w='100%'>
+          <Heading>P1 Score: {player1Score}</Heading>
+          <Heading>P2 Score: {player2Score}</Heading>
         </Box>
       </Box>
     </div>
