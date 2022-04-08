@@ -1,26 +1,16 @@
 import OBS from './obs'
-import { useState } from 'react'
-import {
-  Box,
-  Button,
-  Heading,
-  Input,
-  InputGroup,
-  InputLeftAddon,
-  InputRightElement,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-} from '@chakra-ui/react'
+import { useState, createContext, useRef } from 'react'
+import PlayerBar from '../components/PlayerBar'
+import { Box, Button, Heading } from '@chakra-ui/react'
 
 function App() {
-  const obs = new OBS()
+  const [obs] = useState(new OBS())
   const [player1Name, setPlayer1Name] = useState('')
+  const [player1Score, setPlayer1Score] = useState('0')
   const [player2Name, setPlayer2Name] = useState('')
-  const [player1Score, setPlayer1Score] = useState(0)
-  const [player2Score, setPlayer2Score] = useState(0)
+  const [player2Score, setPlayer2Score] = useState('0')
+  const [matchRound, setMatchRounf] = useState('')
+
   const wsc = {
     port: 4444,
     psw: '',
@@ -35,91 +25,39 @@ function App() {
           <Button colorScheme='blue' onClick={() => obs.connect(wsc)}>
             Connect
           </Button>
-        </Box>
-        <Box>
-          <InputGroup>
-            <InputLeftAddon children='Player 1' />
-            <Input
-              placeholder='Player 1'
-              onChange={(e) => {
-                setPlayer1Name(e.target.value)
-              }}
-            />
-            <NumberInput
-              mr='5rem'
-              onChange={(e, value) => {
-                setPlayer1Score(value)
-              }}
-              defaultValue={0}
-              min={0}
-              max={3}
-            >
-              <NumberInputField />
-              <NumberInputStepper>
-                <NumberIncrementStepper />
-                <NumberDecrementStepper />
-              </NumberInputStepper>
-            </NumberInput>
-            <InputRightElement w='5rem'>
-              <Button
-                size='md'
-                colorScheme='orange'
-                onClick={() => {
-                  obs.setPlayerName({
-                    name: 'player1Name',
-                    payload: { text: player1Name },
-                  })
-                }}
-              >
-                Update
-              </Button>
-            </InputRightElement>
-          </InputGroup>
-        </Box>
-        <Box>
-          <InputGroup>
-            <InputLeftAddon children='Player 2' />
-            <Input
-              placeholder='Player 2'
-              onChange={(e) => {
-                setPlayer2Name(e.target.value)
-              }}
-            />
-            <NumberInput
-              mr='5rem'
-              defaultValue={0}
-              min={0}
-              max={3}
-              onChange={(e, value) => {
-                setPlayer2Score(value)
-              }}
-            >
-              <NumberInputField />
-              <NumberInputStepper>
-                <NumberIncrementStepper />
-                <NumberDecrementStepper />
-              </NumberInputStepper>
-            </NumberInput>
-
-            <InputRightElement w='5rem'>
-              <Button
-                size='md'
-                colorScheme='orange'
-                onClick={() => {
-                  obs.setPlayerName({
-                    name: 'player2Name',
-                    payload: { text: player2Name },
-                  })
-                }}
-              >
-                Update
-              </Button>
-            </InputRightElement>
-          </InputGroup>
-        </Box>
-        <Box w='100%'>
-          <Heading>P1 Score: {player1Score}</Heading>
-          <Heading>P2 Score: {player2Score}</Heading>
+          <PlayerBar
+            pos='1'
+            updateScore={setPlayer1Score}
+            updateName={setPlayer1Name}
+          />
+          <PlayerBar
+            pos='2'
+            updateScore={setPlayer2Score}
+            updateName={setPlayer2Name}
+          />
+          <Button
+            colorScheme='orange'
+            onClick={() => {
+              obs.setSource({
+                name: 'player1Name',
+                payload: { text: player1Name },
+              })
+              obs.setSource({
+                name: 'player2Name',
+                payload: { text: player2Name },
+              })
+              obs.setSource({
+                name: 'player1Score',
+                payload: { text: player1Score },
+              })
+              obs.setSource({
+                name: 'player2Score',
+                payload: { text: player2Score },
+              })
+            }}
+          >
+            Update
+          </Button>
         </Box>
       </Box>
     </div>
