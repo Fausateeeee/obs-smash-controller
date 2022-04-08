@@ -1,14 +1,14 @@
 import OBSWebSocket, { OBSRequestTypes } from 'obs-websocket-js'
-import { OBSWebSocketConfig, OBSSourcePayload } from './types'
+import { IOBSWebSocketConfig, IOBSSourcePayload } from './types'
 
-export default class OBS {
+export class OBS {
   private obs: OBSWebSocket
 
   constructor() {
     this.obs = new OBSWebSocket()
   }
 
-  public async connect(wsc: OBSWebSocketConfig) {
+  public async connect(wsc: IOBSWebSocketConfig) {
     console.log(`ws://${wsc.ip}:${wsc.port}`)
     try {
       await this.obs.connect(`ws://${wsc.ip}:${wsc.port}`)
@@ -23,19 +23,13 @@ export default class OBS {
     await this.obs.disconnect()
   }
 
-  public async setPlayerName(source: OBSSourcePayload) {
+  public async setSource(source: IOBSSourcePayload) {
     const req: OBSRequestTypes['SetInputSettings'] = {
       inputName: source.name,
       inputSettings: source.payload,
     }
     this.obs.call('SetInputSettings', req)
   }
-
-  public async setPlayerCharacter(source: OBSSourcePayload) {}
-
-  public async swapPlayer(source: OBSSourcePayload) {}
-
-  public async updatePlayerScore(source: OBSSourcePayload) {}
-
-  public async updateMatchRound(source: OBSSourcePayload) {}
 }
+
+export default OBS
