@@ -1,84 +1,85 @@
+import OBS from './obs'
 import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
-import OBSWebSocket from 'obs-websocket-js'
-
-const obs = new OBSWebSocket()
-// const ws = new WebSocket('ws://127.0.0.1:4444')
-// ws.send('GetSceneList')
-async function connectToOBS() {
-  try {
-    const { obsWebSocketVersion, negotiatedRpcVersion } = await obs.connect()
-
-    console.log(
-      `Connnected to ${obsWebSocketVersion} with ${negotiatedRpcVersion}`,
-    )
-  } catch (error) {
-    console.error('Failed to connect', error.code, error.message)
-  }
-
-  // obs
-  //   .call('GetVersion')
-  //   .then((data) => console.log(data))
-  //   .then(() => {
-  //     obs.disconnect()
-  //   })
-  //obs.disconnect()
-}
-
-function getList() {
-  obs.call('GetSceneList').then((data) => {
-    console.log(data)
-  })
-}
+import {
+  Box,
+  Button,
+  Heading,
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  InputRightElement,
+} from '@chakra-ui/react'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const obs = new OBS()
+  const [player1Name, setPlayer1Name] = useState('')
+  const [player2Name, setPlayer2Name] = useState('')
+  const wsc = {
+    port: 4444,
+    psw: '',
+    ip: '192.168.0.198',
+  }
 
   return (
     <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type='button' onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-
-        <div>
-          <button type='button' onClick={() => connectToOBS()}>
+      <Box m='auto' w='40%'>
+        <Heading>Smash Yo</Heading>
+        <Box m='auto'>
+          <Button colorScheme='blue' onClick={() => obs.connect(wsc)}>
             Connect
-          </button>
-        </div>
-        <div>
-          <button type='button' onClick={() => getList()}>
-            List
-          </button>
-        </div>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className='App-link'
-            href='https://reactjs.org'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className='App-link'
-            href='https://vitejs.dev/guide/features.html'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+          </Button>
+        </Box>
+        <Box>
+          <InputGroup>
+            <InputLeftAddon children='Player 1' />
+            <Input
+              placeholder='Player 1'
+              onChange={(e) => {
+                setPlayer1Name(e.target.value)
+              }}
+            />
+            <InputRightElement w='5rem'>
+              <Button
+                size='md'
+                colorScheme='orange'
+                onClick={() => {
+                  obs.setPlayerName({
+                    name: 'player1Name',
+                    payload: { text: player1Name },
+                  })
+                }}
+              >
+                Update
+              </Button>
+            </InputRightElement>
+          </InputGroup>
+        </Box>
+        <Box>
+          <InputGroup>
+            <InputLeftAddon children='Player 2' />
+            <Input
+              placeholder='Player 2'
+              onChange={(e) => {
+                setPlayer2Name(e.target.value)
+              }}
+            />
+            <InputRightElement w='5rem'>
+              <Button
+                size='md'
+                colorScheme='orange'
+                onClick={() => {
+                  obs.setPlayerName({
+                    name: 'player2Name',
+                    payload: { text: player2Name },
+                  })
+                }}
+              >
+                Update
+              </Button>
+            </InputRightElement>
+          </InputGroup>
+        </Box>
+      </Box>
     </div>
   )
 }
