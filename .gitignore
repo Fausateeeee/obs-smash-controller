@@ -10,6 +10,9 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+svgs
+characterIcons64
+characterIcons200
 *.local
 
 # Editor directories and files
@@ -22,5 +25,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
 
 utils/secrets.js
