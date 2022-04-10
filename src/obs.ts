@@ -30,6 +30,19 @@ export class OBS {
     }
     this.obs.call('SetInputSettings', req)
   }
+
+  public async startRecording() {
+    this.obs.call('StartRecord')
+  }
+  public async getRecordingInfo() {
+    this.obs.call('GetRecordStatus').then((data) => {
+      console.log(data)
+    })
+  }
+
+  public async stopRecording() {
+    this.obs.call('StopRecord')
+  }
 }
 
 export default OBS
