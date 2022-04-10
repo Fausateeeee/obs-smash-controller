@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { SVGProps } from 'react'
 
-const SvgHomura = (props: SVGProps<SVGSVGElement>) => (
+const SvgPyraMythra = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
     width='1em'
@@ -36,4 +36,4 @@ const SvgHomura = (props: SVGProps<SVGSVGElement>) => (
   </svg>
 )
 
-export default SvgHomura
+export default SvgPyraMythra

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { SVGProps } from 'react'
 
-const SvgDqHero = (props: SVGProps<SVGSVGElement>) => (
+const SvgHero = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width='1em'
     height='1em'
@@ -61,4 +61,4 @@ const SvgDqHero = (props: SVGProps<SVGSVGElement>) => (
   </svg>
 )
 
-export default SvgDqHero
+export default SvgHero
