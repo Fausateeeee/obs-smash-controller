@@ -12,9 +12,10 @@ import {
 
 const PlayerBar = (props) => {
   return (
-    <InputGroup>
+    <InputGroup w='100%'>
       <InputLeftAddon children={`Player ${props.pos}`} />
       <Input
+        value={props.name}
         placeholder={`Player ${props.pos}`}
         onChange={(e) => {
           props.updateName(e.target.value)
@@ -30,7 +31,7 @@ const PlayerBar = (props) => {
           min={0}
           max={3}
         >
-          <NumberInputField />
+          <NumberInputField value={props.score} />
           <NumberInputStepper>
             <NumberIncrementStepper />
             <NumberDecrementStepper />
