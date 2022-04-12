@@ -100,11 +100,10 @@ const InnerSelect = ({ svg, name }) => {
   )
 }
 
-const CharacterSelect = () => {
-  const svgProps = "width='32px' height='32px'"
+const CharacterSelect = ({ onCharacterChange }) => {
   const options = [
     {
-      value: 'banjokazooie',
+      value: 'Banjokazooie',
       label: (
         <InnerSelect
           svg={<BanjoAndKazooie width='32px' height='32px' />}
@@ -113,7 +112,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'bayonetta',
+      value: 'Bayonetta',
       label: (
         <InnerSelect
           svg={<Bayonetta width='32px' height='32px' />}
@@ -122,7 +121,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'bowser',
+      value: 'Bowser',
       label: (
         <InnerSelect
           svg={<Bowser width='32px' height='32px' />}
@@ -131,7 +130,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'bowser jr',
+      value: 'Bowser Jr',
       label: (
         <InnerSelect
           svg={<BowserJr width='32px' height='32px' />}
@@ -140,7 +139,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'byleth',
+      value: 'Byleth',
       label: (
         <InnerSelect
           svg={<Byleth width='32px' height='32px' />}
@@ -149,7 +148,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'captain falcon',
+      value: 'Captain Falcon',
       label: (
         <InnerSelect
           svg={<CaptainFalcon width='32px' height='32px' />}
@@ -158,19 +157,19 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'chrom',
+      value: 'Chrom',
       label: (
         <InnerSelect svg={<Chrom width='32px' height='32px' />} name='Chrom' />
       ),
     },
     {
-      value: 'cloud',
+      value: 'Cloud',
       label: (
         <InnerSelect svg={<Cloud width='32px' height='32px' />} name='Cloud' />
       ),
     },
     {
-      value: 'corrin',
+      value: 'Corrin',
       label: (
         <InnerSelect
           svg={<Corrin width='32px' height='32px' />}
@@ -179,13 +178,13 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'daisy',
+      value: 'Daisy',
       label: (
         <InnerSelect svg={<Daisy width='32px' height='32px' />} name='Daisy' />
       ),
     },
     {
-      value: 'dark pit',
+      value: 'Dark Pit',
       label: (
         <InnerSelect
           svg={<DarkPit width='32px' height='32px' />}
@@ -194,7 +193,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'dark samus',
+      value: 'Dark Samus',
       label: (
         <InnerSelect
           svg={<DarkSamus width='32px' height='32px' />}
@@ -203,7 +202,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'diddy kong',
+      value: 'Diddy Kong',
       label: (
         <InnerSelect
           svg={<DiddyKong width='32px' height='32px' />}
@@ -212,7 +211,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'donkey kong',
+      value: 'Donkey Kong',
       label: (
         <InnerSelect
           svg={<DonkeyKong width='32px' height='32px' />}
@@ -221,7 +220,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'dr mario',
+      value: 'Dr Mario',
       label: (
         <InnerSelect
           svg={<DrMario width='32px' height='32px' />}
@@ -230,7 +229,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'duck hunt',
+      value: 'Duck Hunt',
       label: (
         <InnerSelect
           svg={<DuckHunt width='32px' height='32px' />}
@@ -239,19 +238,19 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'falco',
+      value: 'Falco',
       label: (
         <InnerSelect svg={<Falco width='32px' height='32px' />} name='Falco' />
       ),
     },
     {
-      value: 'fox',
+      value: 'Fox',
       label: (
         <InnerSelect svg={<Fox width='32px' height='32px' />} name='Fox' />
       ),
     },
     {
-      value: 'ganondorf',
+      value: 'Ganondorf',
       label: (
         <InnerSelect
           svg={<Ganondorf width='32px' height='32px' />}
@@ -260,7 +259,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'greninja',
+      value: 'Greninja',
       label: (
         <InnerSelect
           svg={<Greninja width='32px' height='32px' />}
@@ -269,13 +268,13 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'hero',
+      value: 'Hero',
       label: (
         <InnerSelect svg={<Hero width='32px' height='32px' />} name='Hero' />
       ),
     },
     {
-      value: 'ice climbers',
+      value: 'Ice Climbers',
       label: (
         <InnerSelect
           svg={<IceClimbers width='32px' height='32px' />}
@@ -284,13 +283,13 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'ike',
+      value: 'Ike',
       label: (
         <InnerSelect svg={<Ike width='32px' height='32px' />} name='Ike' />
       ),
     },
     {
-      value: 'incineroar',
+      value: 'Incineroar',
       label: (
         <InnerSelect
           svg={<Incineroar width='32px' height='32px' />}
@@ -299,7 +298,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'inkling',
+      value: 'Inkling',
       label: (
         <InnerSelect
           svg={<Inkling width='32px' height='32px' />}
@@ -308,7 +307,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'isabelle',
+      value: 'Isabelle',
       label: (
         <InnerSelect
           svg={<Isabelle width='32px' height='32px' />}
@@ -317,7 +316,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'jigglypuff',
+      value: 'Jigglypuff',
       label: (
         <InnerSelect
           svg={<Jigglypuff width='32px' height='32px' />}
@@ -326,13 +325,13 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'joker',
+      value: 'Joker',
       label: (
         <InnerSelect svg={<Joker width='32px' height='32px' />} name='Joker' />
       ),
     },
     {
-      value: 'kazuya',
+      value: 'Kazuya',
       label: (
         <InnerSelect
           svg={<Kazuya width='32px' height='32px' />}
@@ -341,13 +340,13 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'ken',
+      value: 'Ken',
       label: (
         <InnerSelect svg={<Ken width='32px' height='32px' />} name='Ken' />
       ),
     },
     {
-      value: 'king dedede',
+      value: 'King Dedede',
       label: (
         <InnerSelect
           svg={<KingDedede width='32px' height='32px' />}
@@ -356,7 +355,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'king k rool',
+      value: 'King K Rool',
       label: (
         <InnerSelect
           svg={<KingKRool width='32px' height='32px' />}
@@ -365,19 +364,19 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'kirby',
+      value: 'Kirby',
       label: (
         <InnerSelect svg={<Kirby width='32px' height='32px' />} name='Kirby' />
       ),
     },
     {
-      value: 'link',
+      value: 'Link',
       label: (
         <InnerSelect svg={<Link width='32px' height='32px' />} name='Link' />
       ),
     },
     {
-      value: 'little mac',
+      value: 'Little Mac',
       label: (
         <InnerSelect
           svg={<LittleMac width='32px' height='32px' />}
@@ -386,7 +385,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'lucario',
+      value: 'Lucario',
       label: (
         <InnerSelect
           svg={<Lucario width='32px' height='32px' />}
@@ -395,13 +394,13 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'lucas',
+      value: 'Lucas',
       label: (
         <InnerSelect svg={<Lucas width='32px' height='32px' />} name='Lucas' />
       ),
     },
     {
-      value: 'lucina',
+      value: 'Lucina',
       label: (
         <InnerSelect
           svg={<Lucina width='32px' height='32px' />}
@@ -410,25 +409,25 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'luigi',
+      value: 'Luigi',
       label: (
         <InnerSelect svg={<Luigi width='32px' height='32px' />} name='Luigi' />
       ),
     },
     {
-      value: 'mario',
+      value: 'Mario',
       label: (
         <InnerSelect svg={<Mario width='32px' height='32px' />} name='Mario' />
       ),
     },
     {
-      value: 'marth',
+      value: 'Marth',
       label: (
         <InnerSelect svg={<Marth width='32px' height='32px' />} name='Marth' />
       ),
     },
     {
-      value: 'mega man',
+      value: 'Mega Man',
       label: (
         <InnerSelect
           svg={<MegaMan width='32px' height='32px' />}
@@ -437,7 +436,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'meta knight',
+      value: 'Meta Knight',
       label: (
         <InnerSelect
           svg={<MetaKnight width='32px' height='32px' />}
@@ -446,7 +445,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'mewtwo',
+      value: 'Mewtwo',
       label: (
         <InnerSelect
           svg={<Mewtwo width='32px' height='32px' />}
@@ -455,7 +454,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'mii brawler',
+      value: 'Mii Brawler',
       label: (
         <InnerSelect
           svg={<MiiFighter width='32px' height='32px' />}
@@ -464,7 +463,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'mii gunner',
+      value: 'Mii Gunner',
       label: (
         <InnerSelect
           svg={<MiiFighter width='32px' height='32px' />}
@@ -473,7 +472,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'mii swordfighter',
+      value: 'Mii Swordfighter',
       label: (
         <InnerSelect
           svg={<MiiFighter width='32px' height='32px' />}
@@ -482,7 +481,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'min min',
+      value: 'Min Min',
       label: (
         <InnerSelect
           svg={<Minmin width='32px' height='32px' />}
@@ -491,7 +490,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'mr game and watch',
+      value: 'Mr Game and Watch',
       label: (
         <InnerSelect
           svg={<MrGameAndWatch width='32px' height='32px' />}
@@ -500,13 +499,13 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'ness',
+      value: 'Ness',
       label: (
         <InnerSelect svg={<Ness width='32px' height='32px' />} name='Ness' />
       ),
     },
     {
-      value: 'olimar',
+      value: 'Olimar',
       label: (
         <InnerSelect
           svg={<Olimar width='32px' height='32px' />}
@@ -515,7 +514,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'pacman',
+      value: 'PacMan',
       label: (
         <InnerSelect
           svg={<PacMan width='32px' height='32px' />}
@@ -524,28 +523,28 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'palutena',
+      value: 'Palutena',
       label: (
         <InnerSelect
           svg={<Palutena width='32px' height='32px' />}
-          name='palutena'
+          name='Palutena'
         />
       ),
     },
     {
-      value: 'peach',
+      value: 'Peach',
       label: (
         <InnerSelect svg={<Peach width='32px' height='32px' />} name='Peach' />
       ),
     },
     {
-      value: 'pichu',
+      value: 'Pichu',
       label: (
         <InnerSelect svg={<Pichu width='32px' height='32px' />} name='Pichu' />
       ),
     },
     {
-      value: 'pikachu',
+      value: 'Pikachu',
       label: (
         <InnerSelect
           svg={<Pikachu width='32px' height='32px' />}
@@ -554,7 +553,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'piranha plant',
+      value: 'Piranha Plant',
       label: (
         <InnerSelect
           svg={<PiranhaPlant width='32px' height='32px' />}
@@ -563,13 +562,13 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'pit',
+      value: 'Pit',
       label: (
         <InnerSelect svg={<Pit width='32px' height='32px' />} name='Pit' />
       ),
     },
     {
-      value: 'pokemon trainer',
+      value: 'Pokemon Trainer',
       label: (
         <InnerSelect
           svg={<PokemonTrainer width='32px' height='32px' />}
@@ -578,7 +577,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'pyra and mythra',
+      value: 'Pyra and Mythra',
       label: (
         <InnerSelect
           svg={<PyraMythra width='32px' height='32px' />}
@@ -587,7 +586,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'richter',
+      value: 'Richter',
       label: (
         <InnerSelect
           svg={<Richter width='32px' height='32px' />}
@@ -596,7 +595,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'ridley',
+      value: 'Ridley',
       label: (
         <InnerSelect
           svg={<Ridley width='32px' height='32px' />}
@@ -605,19 +604,19 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'rob',
+      value: 'Rob',
       label: (
         <InnerSelect svg={<Rob width='32px' height='32px' />} name='Rob' />
       ),
     },
     {
-      value: 'robin',
+      value: 'Robin',
       label: (
         <InnerSelect svg={<Robin width='32px' height='32px' />} name='Robin' />
       ),
     },
     {
-      value: 'rosalina and luma',
+      value: 'Rosalina and Luma',
       label: (
         <InnerSelect
           svg={<RosalinaAndLuma width='32px' height='32px' />}
@@ -626,25 +625,25 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'roy',
+      value: 'Roy',
       label: (
         <InnerSelect svg={<Roy width='32px' height='32px' />} name='Roy' />
       ),
     },
     {
-      value: 'ryu',
+      value: 'Ryu',
       label: (
         <InnerSelect svg={<Ryu width='32px' height='32px' />} name='Ryu' />
       ),
     },
     {
-      value: 'samus',
+      value: 'Samus',
       label: (
         <InnerSelect svg={<Samus width='32px' height='32px' />} name='Samus' />
       ),
     },
     {
-      value: 'sephiroth',
+      value: 'Sephiroth',
       label: (
         <InnerSelect
           svg={<Sephiroth width='32px' height='32px' />}
@@ -653,55 +652,55 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'sheik',
+      value: 'Sheik',
       label: (
         <InnerSelect svg={<Sheik width='32px' height='32px' />} name='Sheik' />
       ),
     },
     {
-      value: 'shulk',
+      value: 'Shulk',
       label: (
         <InnerSelect svg={<Shulk width='32px' height='32px' />} name='Shulk' />
       ),
     },
     {
-      value: 'simon',
+      value: 'Simon',
       label: (
         <InnerSelect svg={<Simon width='32px' height='32px' />} name='Simon' />
       ),
     },
     {
-      value: 'snake',
+      value: 'Snake',
       label: (
         <InnerSelect svg={<Snake width='32px' height='32px' />} name='Snake' />
       ),
     },
     {
-      value: 'sonic',
+      value: 'Sonic',
       label: (
         <InnerSelect svg={<Sonic width='32px' height='32px' />} name='Sonic' />
       ),
     },
     {
-      value: 'sora',
+      value: 'Sora',
       label: (
         <InnerSelect svg={<Sora width='32px' height='32px' />} name='Sora' />
       ),
     },
     {
-      value: 'steve',
+      value: 'Steve',
       label: (
         <InnerSelect svg={<Steve width='32px' height='32px' />} name='Steve' />
       ),
     },
     {
-      value: 'terry',
+      value: 'Terry',
       label: (
         <InnerSelect svg={<Terry width='32px' height='32px' />} name='Terry' />
       ),
     },
     {
-      value: 'toon link',
+      value: 'Toon Link',
       label: (
         <InnerSelect
           svg={<ToonLink width='32px' height='32px' />}
@@ -710,7 +709,7 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'villager',
+      value: 'Villager',
       label: (
         <InnerSelect
           svg={<Villager width='32px' height='32px' />}
@@ -719,13 +718,13 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'wario',
+      value: 'Wario',
       label: (
         <InnerSelect svg={<Wario width='32px' height='32px' />} name='Wario' />
       ),
     },
     {
-      value: 'wii fit trainer',
+      value: 'Wii Fit Trainer',
       label: (
         <InnerSelect
           svg={<WiiFitTrainer width='32px' height='32px' />}
@@ -734,19 +733,19 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'wolf',
+      value: 'Wolf',
       label: (
         <InnerSelect svg={<Wolf width='32px' height='32px' />} name='Wolf' />
       ),
     },
     {
-      value: 'yoshi',
+      value: 'Yoshi',
       label: (
         <InnerSelect svg={<Yoshi width='32px' height='32px' />} name='Yoshi' />
       ),
     },
     {
-      value: 'young link',
+      value: 'Young Link',
       label: (
         <InnerSelect
           svg={<YoungLink width='32px' height='32px' />}
@@ -755,13 +754,13 @@ const CharacterSelect = () => {
       ),
     },
     {
-      value: 'zelda',
+      value: 'Zelda',
       label: (
         <InnerSelect svg={<Zelda width='32px' height='32px' />} name='Zelda' />
       ),
     },
     {
-      value: 'zero suit samus',
+      value: 'Zero Suit Samus',
       label: (
         <InnerSelect
           svg={<ZeroSuitSamus width='32px' height='32px' />}
@@ -772,7 +771,17 @@ const CharacterSelect = () => {
   ]
   return (
     <Box>
-      <Select options={options} />
+      <Select
+        options={options}
+        isMulti
+        placeholder='Select a character'
+        onChange={(chars) => {
+          const values = chars.map((char) => {
+            return char.value
+          })
+          onCharacterChange(values)
+        }}
+      />
     </Box>
   )
 }
