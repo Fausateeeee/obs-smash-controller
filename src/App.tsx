@@ -42,10 +42,27 @@ function App() {
     const tempPlayer1Character = player1Character
     const tempPlayer2Character = player2Character
 
-    // setPlayer1Name(tempPlayer2Name)
-    // setPlayer2Name(tempPlayer1Name)
-    // setPlayer1Score(tempPlayer2Score)
-    // setPlayer2Score(tempPlayer1Score)
+    setPlayer1Name(tempPlayer2Name)
+    setPlayer2Name(tempPlayer1Name)
+    setPlayer1Score(tempPlayer2Score)
+    setPlayer2Score(tempPlayer1Score)
+
+    obs.setSource({
+      name: 'player1Name',
+      payload: { text: tempPlayer2Name },
+    })
+    obs.setSource({
+      name: 'player2Name',
+      payload: { text: tempPlayer1Name },
+    })
+    obs.setSource({
+      name: 'player1Score',
+      payload: { text: tempPlayer2Score },
+    })
+    obs.setSource({
+      name: 'player2Score',
+      payload: { text: tempPlayer1Score },
+    })
   }
 
   const handleRecording = () => {
@@ -77,7 +94,7 @@ function App() {
                       setPlayer1Score(score)
                       obs.setSource({
                         name: 'player1Score',
-                        payload: { text: score },
+                        payload: { text: score.toString() },
                       })
                     }
                   : setPlayer1Score
@@ -107,7 +124,7 @@ function App() {
                       setPlayer2Score(score)
                       obs.setSource({
                         name: 'player2Score',
-                        payload: { text: score },
+                        payload: { text: score.toString() },
                       })
                     }
                   : setPlayer1Score
@@ -148,7 +165,13 @@ function App() {
             Connect
           </Button>
           <Text>{isConnected ? 'Connected to OBS' : 'Not connected'} </Text>
-          <Button onClick={() => swapPlayer()}>Swap</Button>
+          <Button
+            onClick={() => {
+              swapPlayer()
+            }}
+          >
+            Swap
+          </Button>
           <Button
             colorScheme='orange'
             onClick={() => {
@@ -175,7 +198,6 @@ function App() {
           <Button onClick={() => handleRecording()}>
             {isRecording ? 'Stop Recording' : 'Start Recording'}
           </Button>
-          <Button onClick={() => obs.getRecordingInfo()}>Test</Button>
           <Switch
             id='hotupdate'
             defaultChecked={true}

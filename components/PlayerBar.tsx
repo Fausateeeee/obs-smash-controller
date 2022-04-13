@@ -10,28 +10,29 @@ import {
   NumberInputStepper,
 } from '@chakra-ui/react'
 
-const PlayerBar = (props) => {
+const PlayerBar = ({ pos, score, name, updateName, updateScore }) => {
   return (
     <InputGroup w='100%'>
-      <InputLeftAddon children={`Player ${props.pos}`} />
+      <InputLeftAddon children={`Player ${pos}`} />
       <Input
-        value={props.name}
-        placeholder={`Player ${props.pos}`}
+        value={name}
+        placeholder={`Player ${pos}`}
         onChange={(e) => {
-          props.updateName(e.target.value)
+          updateName(e.target.value)
         }}
       />
 
       <InputRightElement w='8rem'>
         <NumberInput
           onChange={(e, value) => {
-            props.updateScore(value.toString())
+            updateScore(value.toString())
           }}
           defaultValue={0}
+          value={Number.parseInt(score)}
           min={0}
           max={3}
         >
-          <NumberInputField value={props.score} />
+          <NumberInputField value={score} />
           <NumberInputStepper>
             <NumberIncrementStepper />
             <NumberDecrementStepper />
