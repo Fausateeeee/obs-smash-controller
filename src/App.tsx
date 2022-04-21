@@ -1,18 +1,22 @@
 import OBS from './obs'
 import { useState } from 'react'
-import PlayerBar from '../components/PlayerBar'
-import CharacterSelect from '../components/CharacterSelect'
+import PlayerNameInput from '../components/PlayerNameInput'
+import PlayerScoreInput from '../components/PlayerScoreInput'
+import CharacterSelect from '../components/PlayerCharacterInput'
+import PlayerForm from '../components/PlayerForm'
 import {
   Box,
   Container,
-  SimpleGrid,
   Button,
   Heading,
   Switch,
   Text,
-  Flex,
+  VStack,
+  HStack,
+  Divider,
 } from '@chakra-ui/react'
-import MatchRound from '../components/MatchRound'
+import MatchRound from '../components/MatchRoundInput'
+import Config from './config'
 
 function App() {
   const [obs] = useState(new OBS())
@@ -48,19 +52,19 @@ function App() {
     setPlayer2Score(tempPlayer1Score)
 
     obs.setSource({
-      name: 'player1Name',
+      name: Config.player1NameSource,
       payload: { text: tempPlayer2Name },
     })
     obs.setSource({
-      name: 'player2Name',
+      name: Config.player2NameSource,
       payload: { text: tempPlayer1Name },
     })
     obs.setSource({
-      name: 'player1Score',
+      name: Config.player1ScoreSource,
       payload: { text: tempPlayer2Score },
     })
     obs.setSource({
-      name: 'player2Score',
+      name: Config.player2ScoreSource,
       payload: { text: tempPlayer1Score },
     })
   }
@@ -79,136 +83,149 @@ function App() {
   return (
     <div className='App'>
       <Container mt='20px' maxW='60%'>
-        <Heading as='h1' textAlign='center'>
-          Smash OBS Controller
-        </Heading>
-        <SimpleGrid columns={[2]} spacingX='1%'>
-          <Box w='100%'>
-            <PlayerBar
-              pos='1'
+        <VStack w='100%'>
+          <Heading as='h1' textAlign='center'>
+            Smash OBS Controller
+          </Heading>
+          <HStack w='100%' spacing='20px'>
+            <PlayerForm
+              position='1'
               name={player1Name}
               score={player1Score}
-              updateScore={
-                isHotUpdating
-                  ? (score: string) => {
-                      setPlayer1Score(score)
-                      obs.setSource({
-                        name: 'player1Score',
-                        payload: { text: score.toString() },
-                      })
-                    }
-                  : setPlayer1Score
-              }
               updateName={
                 isHotUpdating
                   ? (name: string) => {
                       setPlayer1Name(name)
                       obs.setSource({
-                        name: 'player1Name',
+                        name: Config.player1NameSource,
                         payload: { text: name },
                       })
                     }
                   : setPlayer1Name
               }
-            />
-            <CharacterSelect onCharacterChange={setPlayer1Character} />
-          </Box>
-          <Box w='100%'>
-            <PlayerBar
-              pos='2'
-              name={player2Name}
-              score={player2Score}
               updateScore={
                 isHotUpdating
                   ? (score: string) => {
-                      setPlayer2Score(score)
+                      setPlayer1Score(score)
                       obs.setSource({
-                        name: 'player2Score',
+                        name: Config.player1ScoreSource,
                         payload: { text: score.toString() },
                       })
                     }
                   : setPlayer1Score
               }
+              updateCharacter={setPlayer1Character}
+            />
+            <Divider orientation='vertical' />
+            <PlayerForm
+              position='2'
+              name={player2Name}
+              score={player2Score}
               updateName={
                 isHotUpdating
                   ? (name: string) => {
                       setPlayer2Name(name)
                       obs.setSource({
-                        name: 'player2Name',
+                        name: Config.player2NameSource,
                         payload: { text: name },
                       })
                     }
-                  : setPlayer1Name
+                  : setPlayer2Name
               }
+              updateScore={
+                isHotUpdating
+                  ? (score: string) => {
+                      setPlayer2Score(score)
+                      obs.setSource({
+                        name: Config.player2ScoreSource,
+                        payload: { text: score.toString() },
+                      })
+                    }
+                  : setPlayer2Score
+              }
+              updateCharacter={setPlayer2Character}
             />
-            <CharacterSelect onCharacterChange={setPlayer2Character} />
-          </Box>
-        </SimpleGrid>
-        <MatchRound
-          updateRound={
-            isHotUpdating
-              ? (round: string) => {
-                  setMatchRound(round)
-                  obs.setSource({
-                    name: 'matchRound',
-                    payload: { text: round },
-                  })
-                }
-              : setMatchRound
-          }
-        />
-      </Container>
+          </HStack>
 
-      <Box m='auto' w='60%'>
-        <Box m='auto'>
-          <Button colorScheme='green' onClick={() => obs.connect(wsc)}>
-            Connect
-          </Button>
-          <Text>{isConnected ? 'Connected to OBS' : 'Not connected'} </Text>
-          <Button
-            onClick={() => {
-              swapPlayer()
-            }}
-          >
-            Swap
-          </Button>
-          <Button
-            colorScheme='orange'
-            onClick={() => {
-              obs.setSource({
-                name: 'player1Name',
-                payload: { text: player1Name },
-              })
-              obs.setSource({
-                name: 'player2Name',
-                payload: { text: player2Name },
-              })
-              obs.setSource({
-                name: 'player1Score',
-                payload: { text: player1Score },
-              })
-              obs.setSource({
-                name: 'player2Score',
-                payload: { text: player2Score },
-              })
-            }}
-          >
-            Update
-          </Button>
-          <Button onClick={() => handleRecording()}>
-            {isRecording ? 'Stop Recording' : 'Start Recording'}
-          </Button>
-          <Switch
-            id='hotupdate'
-            defaultChecked={true}
-            onChange={(e) => {
-              setIsHotUpdating(e.target.checked)
-            }}
-          >
-            Hot update
-          </Switch>
-        </Box>
-      </Box>
+          <Divider />
+
+          <MatchRound
+            updateRound={
+              isHotUpdating
+                ? (round: string) => {
+                    setMatchRound(round)
+                    obs.setSource({
+                      name: Config.matchNameSource,
+                      payload: { text: round },
+                    })
+                  }
+                : setMatchRound
+            }
+          />
+
+          <Divider />
+
+          <HStack>
+            <Button
+              colorScheme={isConnected ? 'red' : 'green'}
+              onClick={() =>
+                isConnected
+                  ? obs.disconnect(setIsConnected)
+                  : obs.connect(wsc, setIsConnected)
+              }
+            >
+              {isConnected ? 'Disconnect' : 'Connect'}
+            </Button>
+            <Text>{isConnected ? 'Connected to OBS' : 'Not connected'} </Text>
+            <Button
+              onClick={() => {
+                swapPlayer()
+              }}
+            >
+              Swap
+            </Button>
+            <Button
+              colorScheme='orange'
+              onClick={() => {
+                obs.setSource({
+                  name: Config.player1NameSource,
+                  payload: { text: player1Name },
+                })
+                obs.setSource({
+                  name: Config.player2NameSource,
+                  payload: { text: player2Name },
+                })
+                obs.setSource({
+                  name: Config.player1ScoreSource,
+                  payload: { text: player1Score },
+                })
+                obs.setSource({
+                  name: Config.player2ScoreSource,
+                  payload: { text: player2Score },
+                })
+                obs.setSource({
+                  name: Config.matchNameSource,
+                  payload: { text: matchRound },
+                })
+              }}
+            >
+              Update
+            </Button>
+            <Button onClick={() => handleRecording()}>
+              {isRecording ? 'Stop Recording' : 'Start Recording'}
+            </Button>
+            <Switch
+              id='hotupdate'
+              defaultChecked={true}
+              onChange={(e) => {
+                setIsHotUpdating(e.target.checked)
+              }}
+            >
+              Hot update
+            </Switch>
+          </HStack>
+        </VStack>
+      </Container>
     </div>
   )
 }

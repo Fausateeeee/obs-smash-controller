@@ -1,4 +1,4 @@
-import {} from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import { CreatableSelect } from 'chakra-react-select'
 
 const MatchRound = ({ updateRound }) => {
@@ -105,12 +105,14 @@ const MatchRound = ({ updateRound }) => {
     },
   ]
   return (
-    <CreatableSelect
-      options={options}
-      onChange={(round) => {
-        updateRound(round?.value)
-      }}
-    ></CreatableSelect>
+    <Box w='100%'>
+      <CreatableSelect
+        options={options}
+        onChange={(round) => {
+          updateRound(round?.value)
+        }}
+      />
+    </Box>
   )
 }
 

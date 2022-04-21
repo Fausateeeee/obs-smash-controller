@@ -1,4 +1,4 @@
-import { Box, Text } from '@chakra-ui/react'
+import { Box, Text, InputGroup, InputLeftAddon } from '@chakra-ui/react'
 import { Select } from 'chakra-react-select'
 import {
   BanjoAndKazooie,
@@ -89,13 +89,11 @@ import {
 
 const InnerSelect = ({ svg, name }) => {
   return (
-    <Box>
-      <Box display='flex'>
-        {svg}
-        <Text ml='15px' mt='3px' fontSize='18px'>
-          {name}
-        </Text>
-      </Box>
+    <Box display='flex' w='100%'>
+      {svg}
+      <Text ml='15px' mt='auto' mb='auto' fontSize='18px'>
+        {name}
+      </Text>
     </Box>
   )
 }
@@ -770,18 +768,23 @@ const CharacterSelect = ({ onCharacterChange }) => {
     },
   ]
   return (
-    <Box>
-      <Select
-        options={options}
-        isMulti
-        placeholder='Select a character'
-        onChange={(chars) => {
-          const values = chars.map((char) => {
-            return char.value
-          })
-          onCharacterChange(values)
-        }}
-      />
+    <Box w='100%'>
+      <InputGroup w='100%'>
+        <InputLeftAddon w='110px' children={`Character:`} />
+        <Box w='100%'>
+          <Select
+            isMulti
+            options={options}
+            placeholder='Select a character'
+            onChange={(chars) => {
+              const values = chars.map((char) => {
+                return char.value
+              })
+              onCharacterChange(values)
+            }}
+          />
+        </Box>
+      </InputGroup>
     </Box>
   )
 }

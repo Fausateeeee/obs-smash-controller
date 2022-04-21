@@ -1,29 +1,21 @@
 import {
-  Input,
+  Box,
   InputGroup,
   InputLeftAddon,
-  InputRightElement,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
 } from '@chakra-ui/react'
 
-const PlayerBar = ({ pos, score, name, updateName, updateScore }) => {
+const PlayerScoreInput = ({ score, updateScore }) => {
   return (
-    <InputGroup w='100%'>
-      <InputLeftAddon children={`Player ${pos}`} />
-      <Input
-        value={name}
-        placeholder={`Player ${pos}`}
-        onChange={(e) => {
-          updateName(e.target.value)
-        }}
-      />
-
-      <InputRightElement w='8rem'>
+    <Box>
+      <InputGroup>
+        <InputLeftAddon children={'Score:'} w='110px' />
         <NumberInput
+          w='100%'
           onChange={(e, value) => {
             updateScore(value.toString())
           }}
@@ -38,9 +30,9 @@ const PlayerBar = ({ pos, score, name, updateName, updateScore }) => {
             <NumberDecrementStepper />
           </NumberInputStepper>
         </NumberInput>
-      </InputRightElement>
-    </InputGroup>
+      </InputGroup>
+    </Box>
   )
 }
 
-export default PlayerBar
+export default PlayerScoreInput

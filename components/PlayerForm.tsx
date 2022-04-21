@@ -1,12 +1,24 @@
-import { Box, Flex } from '@chakra-ui/react'
-import PlayerBar from './PlayerBar'
-import CharacterSelect from './CharacterSelect'
+import { Box, Stack, Text } from '@chakra-ui/react'
+import PlayerNameInput from './PlayerNameInput'
+import PlayerScoreInput from './PlayerScoreInput'
+import PlayerCharacterInput from './PlayerCharacterInput'
 
-const PlayerForm = () => {
+const PlayerForm = ({
+  position,
+  name,
+  score,
+  updateName,
+  updateScore,
+  updateCharacter,
+}) => {
   return (
-    <Box display='flex'>
-      <PlayerBar />
-      <CharacterSelect />
+    <Box w='100%'>
+      <Stack>
+        <Text>Player {position}</Text>
+        <PlayerNameInput name={name} updateName={updateName} />
+        <PlayerScoreInput score={score} updateScore={updateScore} />
+        <PlayerCharacterInput onCharacterChange={updateCharacter} />
+      </Stack>
     </Box>
   )
 }
