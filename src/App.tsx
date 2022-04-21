@@ -1,9 +1,7 @@
 import OBS from './obs'
 import { useState } from 'react'
-import PlayerNameInput from '../components/PlayerNameInput'
-import PlayerScoreInput from '../components/PlayerScoreInput'
-import CharacterSelect from '../components/PlayerCharacterInput'
 import PlayerForm from '../components/PlayerForm'
+import MatchRound from '../components/MatchRoundInput'
 import {
   Box,
   Container,
@@ -14,13 +12,17 @@ import {
   VStack,
   HStack,
   Divider,
+  IconButton,
+  useColorMode,
+  useColorModeValue,
 } from '@chakra-ui/react'
-import MatchRound from '../components/MatchRoundInput'
+import { SunIcon, MoonIcon } from '@chakra-ui/icons'
+
 import Config from './config'
 
 function App() {
   const [obs] = useState(new OBS())
-
+  const { toggleColorMode } = useColorMode()
   const [player1Name, setPlayer1Name] = useState('')
   const [player1Score, setPlayer1Score] = useState('0')
   const [player2Name, setPlayer2Name] = useState('')
@@ -83,13 +85,15 @@ function App() {
   return (
     <div className='App'>
       <Container mt='20px' maxW='60%'>
-        <VStack w='100%'>
+        <VStack w='100%' spacing='16px'>
           <Heading as='h1' textAlign='center'>
             Smash OBS Controller
           </Heading>
+          <Divider />
           <HStack w='100%' spacing='20px'>
             <PlayerForm
               position='1'
+              color='blue'
               name={player1Name}
               score={player1Score}
               updateName={
@@ -119,6 +123,7 @@ function App() {
             <Divider orientation='vertical' />
             <PlayerForm
               position='2'
+              color='red'
               name={player2Name}
               score={player2Score}
               updateName={
@@ -148,7 +153,7 @@ function App() {
           </HStack>
 
           <Divider />
-
+          <Heading>Round</Heading>
           <MatchRound
             updateRound={
               isHotUpdating
@@ -164,7 +169,7 @@ function App() {
           />
 
           <Divider />
-
+          <Heading>Controls</Heading>
           <HStack>
             <Button
               colorScheme={isConnected ? 'red' : 'green'}
@@ -223,6 +228,12 @@ function App() {
             >
               Hot update
             </Switch>
+            <IconButton
+              aria-label='Toggle theme'
+              colorScheme={useColorModeValue('purple', 'orange')}
+              icon={useColorModeValue(<MoonIcon />, <SunIcon />)}
+              onClick={toggleColorMode}
+            />
           </HStack>
         </VStack>
       </Container>

@@ -9,13 +9,20 @@ import {
   NumberInputField,
   NumberInputStepper,
   Box,
+  useColorModeValue,
 } from '@chakra-ui/react'
 
-const PlayerNameInput = ({ name, updateName }) => {
+const PlayerNameInput = ({ name, updateName, color }) => {
   return (
-    <Box>
+    <Box w='100%'>
       <InputGroup>
-        <InputLeftAddon children={`Tag`} w='110px' />
+        <InputLeftAddon
+          children={`Name:`}
+          w='110px'
+          bgColor={useColorModeValue(`${color}.500`, `${color}.300`)}
+          color={useColorModeValue('white', 'black')}
+          placement='left'
+        />
         <Input
           value={name}
           placeholder={`Name`}

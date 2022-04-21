@@ -1,4 +1,10 @@
-import { Box, Text, InputGroup, InputLeftAddon } from '@chakra-ui/react'
+import {
+  Box,
+  Text,
+  InputGroup,
+  InputLeftAddon,
+  useColorModeValue,
+} from '@chakra-ui/react'
 import { Select } from 'chakra-react-select'
 import {
   BanjoAndKazooie,
@@ -98,7 +104,7 @@ const InnerSelect = ({ svg, name }) => {
   )
 }
 
-const CharacterSelect = ({ onCharacterChange }) => {
+const CharacterSelect = ({ onCharacterChange, color }) => {
   const options = [
     {
       value: 'Banjokazooie',
@@ -770,8 +776,14 @@ const CharacterSelect = ({ onCharacterChange }) => {
   return (
     <Box w='100%'>
       <InputGroup w='100%'>
-        <InputLeftAddon w='110px' children={`Character:`} />
-        <Box w='100%'>
+        <InputLeftAddon
+          w='110px'
+          children={`Character:`}
+          bgColor={useColorModeValue(`${color}.500`, `${color}.300`)}
+          color={useColorModeValue('white', 'black')}
+          zIndex='600'
+        />
+        <Box w='100%' zIndex='599'>
           <Select
             isMulti
             options={options}

@@ -7,15 +7,21 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
+  useColorModeValue,
 } from '@chakra-ui/react'
 
-const PlayerScoreInput = ({ score, updateScore }) => {
+const PlayerScoreInput = ({ score, updateScore, color }) => {
   return (
-    <Box>
+    <Box w='100%'>
       <InputGroup>
-        <InputLeftAddon children={'Score:'} w='110px' />
+        <InputLeftAddon
+          children={'Score:'}
+          w='110px'
+          bgColor={useColorModeValue(`${color}.500`, `${color}.300`)}
+          color={useColorModeValue('white', 'black')}
+          zIndex='600'
+        />
         <NumberInput
-          w='100%'
           onChange={(e, value) => {
             updateScore(value.toString())
           }}
@@ -23,6 +29,8 @@ const PlayerScoreInput = ({ score, updateScore }) => {
           value={Number.parseInt(score)}
           min={0}
           max={3}
+          w='100%'
+          zIndex='599'
         >
           <NumberInputField value={score} />
           <NumberInputStepper>

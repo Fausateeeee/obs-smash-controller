@@ -52,22 +52,6 @@ const MatchRound = ({ updateRound }) => {
       label: 'Winners Round 5',
     },
     {
-      value: 'Winners Round 6',
-      label: 'Winners Round 6',
-    },
-    {
-      value: 'Winners Round 7',
-      label: 'Winners Round 7',
-    },
-    {
-      value: 'Winners Round 8',
-      label: 'Winners Round 8',
-    },
-    {
-      value: 'Winners Round 9',
-      label: 'Winners Round 9',
-    },
-    {
       value: 'Losers Round 1',
       label: 'Losers Round 1',
     },
@@ -94,14 +78,6 @@ const MatchRound = ({ updateRound }) => {
     {
       value: 'Losers Round 7',
       label: 'Losers Round 7',
-    },
-    {
-      value: 'Losers Round 8',
-      label: 'Losers Round 8',
-    },
-    {
-      value: 'Losers Round 9',
-      label: 'Losers Round 9',
     },
   ]
   return (

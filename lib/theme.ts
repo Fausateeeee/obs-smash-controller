@@ -25,6 +25,7 @@ const components = {
       },
     },
   },
+
 }
 
 const fonts = {
