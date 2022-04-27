@@ -16,14 +16,34 @@ import {
   useColorMode,
   useColorModeValue,
 } from '@chakra-ui/react'
-import { SunIcon, MoonIcon } from '@chakra-ui/icons'
+import { SunIcon, MoonIcon, CheckIcon, CloseIcon } from '@chakra-ui/icons'
 
 import Config from './config'
+import { useAppDispatch, useAppSelector } from './redux/hooks'
+import { setNameP1 } from './redux/features/player/player-slice'
+
+const Connected = () => {
+  return (
+    <HStack>
+      <Text>Connected</Text> <CheckIcon color='green' />
+    </HStack>
+  )
+}
+
+const Disconnected = () => {
+  return (
+    <HStack>
+      <Text>No connection</Text> <CloseIcon color='red' />
+    </HStack>
+  )
+}
 
 function App() {
+  const dispatch = useAppDispatch()
+  const player1Name = useAppSelector((state) => state.player.nameP1)
+
   const [obs] = useState(new OBS())
   const { toggleColorMode } = useColorMode()
-  const [player1Name, setPlayer1Name] = useState('')
   const [player1Score, setPlayer1Score] = useState('0')
   const [player2Name, setPlayer2Name] = useState('')
   const [player2Score, setPlayer2Score] = useState('0')
@@ -32,43 +52,15 @@ function App() {
   const [matchRound, setMatchRound] = useState('')
   const [isRecording, setIsRecording] = useState(false)
   const [isHotUpdating, setIsHotUpdating] = useState(true)
-  const [isConnected, setIsConnected] = useState(false)
+  const [isOBSConnected, setIsOBSConnected] = useState(false)
+  const [isYouTubeConnected, setIsYouTubeConnected] = useState(false)
+  const [isChallongeConnected, setIsChallongeConnected] = useState(false)
+  const [isTwitchConnected, setIsTwitchConnected] = useState(false)
 
   const wsc = {
     port: 4444,
     psw: '',
     ip: '192.168.0.198',
-  }
-
-  const swapPlayer = () => {
-    const tempPlayer1Name = player1Name
-    const tempPlayer2Name = player2Name
-    const tempPlayer1Score = player1Score
-    const tempPlayer2Score = player2Score
-    const tempPlayer1Character = player1Character
-    const tempPlayer2Character = player2Character
-
-    setPlayer1Name(tempPlayer2Name)
-    setPlayer2Name(tempPlayer1Name)
-    setPlayer1Score(tempPlayer2Score)
-    setPlayer2Score(tempPlayer1Score)
-
-    obs.setSource({
-      name: Config.player1NameSource,
-      payload: { text: tempPlayer2Name },
-    })
-    obs.setSource({
-      name: Config.player2NameSource,
-      payload: { text: tempPlayer1Name },
-    })
-    obs.setSource({
-      name: Config.player1ScoreSource,
-      payload: { text: tempPlayer2Score },
-    })
-    obs.setSource({
-      name: Config.player2ScoreSource,
-      payload: { text: tempPlayer1Score },
-    })
   }
 
   const handleRecording = () => {
@@ -99,7 +91,7 @@ function App() {
               updateName={
                 isHotUpdating
                   ? (name: string) => {
-                      setPlayer1Name(name)
+                      dispatch(setNameP1(name))
                       obs.setSource({
                         name: Config.player1NameSource,
                         payload: { text: name },
@@ -169,26 +161,30 @@ function App() {
           />
 
           <Divider />
-          <Heading>Controls</Heading>
+          <Heading>Connection Status</Heading>
+          <HStack>
+            <Text>
+              OBS: {isOBSConnected ? <Connected /> : <Disconnected />}
+            </Text>
+          </HStack>
+          <HStack>
+            <Text>
+              Youtube: {isYouTubeConnected ? <Connected /> : <Disconnected />}
+            </Text>
+          </HStack>
+          <Heading>Control Panel</Heading>
           <HStack>
             <Button
-              colorScheme={isConnected ? 'red' : 'green'}
+              colorScheme={isOBSConnected ? 'red' : 'green'}
               onClick={() =>
-                isConnected
-                  ? obs.disconnect(setIsConnected)
-                  : obs.connect(wsc, setIsConnected)
+                isOBSConnected
+                  ? obs.disconnect(setIsOBSConnected)
+                  : obs.connect(wsc, setIsOBSConnected)
               }
             >
-              {isConnected ? 'Disconnect' : 'Connect'}
+              {isOBSConnected ? 'Disconnect' : 'Connect to OBS'}
             </Button>
-            <Text>{isConnected ? 'Connected to OBS' : 'Not connected'} </Text>
-            <Button
-              onClick={() => {
-                swapPlayer()
-              }}
-            >
-              Swap
-            </Button>
+            <Button onClick={() => {}}>Swap</Button>
             <Button
               colorScheme='orange'
               onClick={() => {

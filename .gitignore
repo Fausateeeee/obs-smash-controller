@@ -28,3 +28,7 @@ characterIcons200
 
 
 utils/secrets.js
+client_secret.json
+.env
+
+/services
