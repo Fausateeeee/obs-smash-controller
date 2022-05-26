@@ -1,18 +1,18 @@
 import {
-  Stack,
   Input,
   InputGroup,
   InputLeftAddon,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
   Box,
   useColorModeValue,
 } from '@chakra-ui/react'
 
-const PlayerNameInput = ({ name, updateName, color }) => {
+interface PlayerNameInputProps {
+  name: string
+  updateName: Function
+  color: string
+}
+
+const PlayerNameInput = ({ name, updateName, color }: PlayerNameInputProps) => {
   return (
     <Box w='100%'>
       <InputGroup>

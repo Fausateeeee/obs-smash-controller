@@ -6,6 +6,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 import { Select } from 'chakra-react-select'
+import { Component, ReactElement } from 'react'
 import {
   BanjoAndKazooie,
   Bayonetta,
@@ -93,7 +94,17 @@ import {
   ZeroSuitSamus,
 } from '../assets/iconsComponents/index'
 
-const InnerSelect = ({ svg, name }) => {
+interface InnerSelectProps {
+  svg: ReactElement
+  name: string
+}
+
+interface CharacterSelectProps {
+  onCharacterChange: Function
+  color: string
+}
+
+const InnerSelect = ({ svg, name }: InnerSelectProps) => {
   return (
     <Box display='flex' w='100%'>
       {svg}
@@ -104,7 +115,10 @@ const InnerSelect = ({ svg, name }) => {
   )
 }
 
-const CharacterSelect = ({ onCharacterChange, color }) => {
+const CharacterSelect = ({
+  onCharacterChange,
+  color,
+}: CharacterSelectProps) => {
   const options = [
     {
       value: 'Banjokazooie',

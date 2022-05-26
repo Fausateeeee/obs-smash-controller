@@ -6,13 +6,7 @@ const SvgSora = (props: SVGProps<SVGSVGElement>) => (
     xmlns='http://www.w3.org/2000/svg'
     width='1em'
     height='1em'
-    style={{
-      shapeRendering: 'geometricPrecision',
-      textRendering: 'geometricPrecision',
-      imageRendering: 'optimizeQuality',
-      fillRule: 'evenodd',
-      clipRule: 'evenodd',
-    }}
+    viewBox='0 0 200 200'
     {...props}
   >
     <path

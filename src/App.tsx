@@ -19,8 +19,7 @@ import {
 import { SunIcon, MoonIcon, CheckIcon, CloseIcon } from '@chakra-ui/icons'
 
 import Config from './config'
-import { useAppDispatch, useAppSelector } from './redux/hooks'
-import { setNameP1 } from './redux/features/player/player-slice'
+import { useAppSelector } from './redux/hooks'
 
 const Connected = () => {
   return (
@@ -39,19 +38,10 @@ const Disconnected = () => {
 }
 
 function App() {
-  const dispatch = useAppDispatch()
-  const player1Name = useAppSelector((state) => state.player.nameP1)
-
   const [obs] = useState(new OBS())
   const { toggleColorMode } = useColorMode()
-  const [player1Score, setPlayer1Score] = useState('0')
-  const [player2Name, setPlayer2Name] = useState('')
-  const [player2Score, setPlayer2Score] = useState('0')
-  const [player1Character, setPlayer1Character] = useState([])
-  const [player2Character, setPlayer2Character] = useState([])
-  const [matchRound, setMatchRound] = useState('')
+
   const [isRecording, setIsRecording] = useState(false)
-  const [isHotUpdating, setIsHotUpdating] = useState(true)
   const [isOBSConnected, setIsOBSConnected] = useState(false)
   const [isYouTubeConnected, setIsYouTubeConnected] = useState(false)
   const [isChallongeConnected, setIsChallongeConnected] = useState(false)
@@ -73,7 +63,11 @@ function App() {
       setIsRecording(!isRecording)
     }
   }
-
+  const nameP1 = useAppSelector((state) => state.player.nameP1)
+  const nameP2 = useAppSelector((state) => state.player.nameP2)
+  const scoreP1 = useAppSelector((state) => state.player.scoreP1)
+  const scoreP2 = useAppSelector((state) => state.player.scoreP2)
+  const matchRound = useAppSelector((state) => state.player.matchRound)
   return (
     <div className='App'>
       <Container mt='20px' maxW='60%'>
@@ -83,82 +77,13 @@ function App() {
           </Heading>
           <Divider />
           <HStack w='100%' spacing='20px'>
-            <PlayerForm
-              position='1'
-              color='blue'
-              name={player1Name}
-              score={player1Score}
-              updateName={
-                isHotUpdating
-                  ? (name: string) => {
-                      dispatch(setNameP1(name))
-                      obs.setSource({
-                        name: Config.player1NameSource,
-                        payload: { text: name },
-                      })
-                    }
-                  : setPlayer1Name
-              }
-              updateScore={
-                isHotUpdating
-                  ? (score: string) => {
-                      setPlayer1Score(score)
-                      obs.setSource({
-                        name: Config.player1ScoreSource,
-                        payload: { text: score.toString() },
-                      })
-                    }
-                  : setPlayer1Score
-              }
-              updateCharacter={setPlayer1Character}
-            />
-            <Divider orientation='vertical' />
-            <PlayerForm
-              position='2'
-              color='red'
-              name={player2Name}
-              score={player2Score}
-              updateName={
-                isHotUpdating
-                  ? (name: string) => {
-                      setPlayer2Name(name)
-                      obs.setSource({
-                        name: Config.player2NameSource,
-                        payload: { text: name },
-                      })
-                    }
-                  : setPlayer2Name
-              }
-              updateScore={
-                isHotUpdating
-                  ? (score: string) => {
-                      setPlayer2Score(score)
-                      obs.setSource({
-                        name: Config.player2ScoreSource,
-                        payload: { text: score.toString() },
-                      })
-                    }
-                  : setPlayer2Score
-              }
-              updateCharacter={setPlayer2Character}
-            />
+            <PlayerForm position='1' color='blue' />
+            <PlayerForm position='2' color='red' />
           </HStack>
 
           <Divider />
           <Heading>Round</Heading>
-          <MatchRound
-            updateRound={
-              isHotUpdating
-                ? (round: string) => {
-                    setMatchRound(round)
-                    obs.setSource({
-                      name: Config.matchNameSource,
-                      payload: { text: round },
-                    })
-                  }
-                : setMatchRound
-            }
-          />
+          <MatchRound />
 
           <Divider />
           <Heading>Connection Status</Heading>
@@ -187,43 +112,22 @@ function App() {
             <Button onClick={() => {}}>Swap</Button>
             <Button
               colorScheme='orange'
-              onClick={() => {
-                obs.setSource({
-                  name: Config.player1NameSource,
-                  payload: { text: player1Name },
-                })
-                obs.setSource({
-                  name: Config.player2NameSource,
-                  payload: { text: player2Name },
-                })
-                obs.setSource({
-                  name: Config.player1ScoreSource,
-                  payload: { text: player1Score },
-                })
-                obs.setSource({
-                  name: Config.player2ScoreSource,
-                  payload: { text: player2Score },
-                })
-                obs.setSource({
-                  name: Config.matchNameSource,
-                  payload: { text: matchRound },
-                })
-              }}
+              onClick={() =>
+                obs.updateAllKnownSource(
+                  nameP1,
+                  nameP2,
+                  scoreP1,
+                  scoreP2,
+                  matchRound,
+                )
+              }
             >
               Update
             </Button>
             <Button onClick={() => handleRecording()}>
               {isRecording ? 'Stop Recording' : 'Start Recording'}
             </Button>
-            <Switch
-              id='hotupdate'
-              defaultChecked={true}
-              onChange={(e) => {
-                setIsHotUpdating(e.target.checked)
-              }}
-            >
-              Hot update
-            </Switch>
+
             <IconButton
               aria-label='Toggle theme'
               colorScheme={useColorModeValue('purple', 'orange')}

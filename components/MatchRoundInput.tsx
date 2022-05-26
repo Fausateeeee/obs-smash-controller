@@ -1,7 +1,9 @@
 import { Box } from '@chakra-ui/react'
 import { CreatableSelect } from 'chakra-react-select'
+import { setMatchRound } from '../src/redux/features/player/player-slice'
+import { useAppDispatch } from '../src/redux/hooks'
 
-const MatchRound = ({ updateRound }) => {
+const MatchRound = () => {
   const options = [
     {
       value: 'Grand Final',
@@ -80,12 +82,15 @@ const MatchRound = ({ updateRound }) => {
       label: 'Losers Round 7',
     },
   ]
+
+  const dispatch = useAppDispatch()
+  let updateRound = (round: string) => dispatch(setMatchRound(round))
   return (
     <Box w='100%'>
       <CreatableSelect
         options={options}
         onChange={(round) => {
-          updateRound(round?.value)
+          updateRound(round?.value || '')
         }}
       />
     </Box>

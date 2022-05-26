@@ -10,7 +10,17 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 
-const PlayerScoreInput = ({ score, updateScore, color }) => {
+interface PlayerScoreInputProps {
+  score: string
+  updateScore: Function
+  color: string
+}
+
+const PlayerScoreInput = ({
+  score,
+  updateScore,
+  color,
+}: PlayerScoreInputProps) => {
   return (
     <Box w='100%'>
       <InputGroup>
