@@ -15,6 +15,6 @@ module.exports = fp(async function (fastify, opts) {
     // register a fastify url to start the redirect flow
     startRedirectPath: '/login/google',
     // facebook redirect here after the user login
-    callbackUri: 'http://localhost:4000/login/google/callback',
+    callbackUri: 'http://localhost:3000/login/google/callback',
   })
 })

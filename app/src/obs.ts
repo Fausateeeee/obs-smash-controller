@@ -45,7 +45,9 @@ export class OBS {
   }
 
   public async startRecording() {
-    this.obs.call('StartRecord')
+    this.obs.call('StartRecord').then((data) => {
+      console.log(data)
+    })
   }
   public async getRecordingInfo() {
     this.obs.call('GetRecordStatus').then((data) => {

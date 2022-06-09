@@ -127,6 +127,11 @@ function App() {
             <Button onClick={() => handleRecording()}>
               {isRecording ? 'Stop Recording' : 'Start Recording'}
             </Button>
+            <Button
+              onClick={async () => await console.log(obs.getRecordingInfo())}
+            >
+              Test Recording Info
+            </Button>
 
             <IconButton
               aria-label='Toggle theme'

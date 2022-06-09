@@ -3,7 +3,7 @@ import PlayerNameInput from './PlayerNameInput'
 import PlayerScoreInput from './PlayerScoreInput'
 import PlayerCharacterInput from './PlayerCharacterInput'
 
-import { useAppDispatch, useAppSelector } from '../../src/redux/hooks'
+import { useAppDispatch, useAppSelector } from '../src/redux/hooks'
 import {
   setNameP1,
   setNameP2,
@@ -11,7 +11,7 @@ import {
   setScoreP2,
   setCharacterP1,
   setCharacterP2,
-} from '../../src/redux/features/player/player-slice'
+} from '../src/redux/features/player/player-slice'
 
 interface PropsPlayerForm {
   position: string
